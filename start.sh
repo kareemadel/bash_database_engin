@@ -12,7 +12,7 @@ while true; do
             source ./helper_scripts/database/database_menu.sh;
             ;;
         1)
-            source ./helper_scripts/table/table_menu.sh;
+            source ./helper_scripts/database/use_database.sh;
             ;;
     esac
 done

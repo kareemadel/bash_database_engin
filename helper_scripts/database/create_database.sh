@@ -16,15 +16,15 @@ while IFS= read -r name; do
         fi
     fi
     if [ -z $message ]; then
-        if mkdir "./databases/$name" ; then
-            if mkdir "./metadata/$name" ; then
+        if mkdir -p "./databases/data/$name" ; then
+            if mkdir -p "./databases/metadata/$name" ; then
                 printf "You have created the database $name successfully.\n";
                 DATABASE="$name";
                 read;
                 source ./helper_scripts/database/use_database.sh;
                 break;
             else
-                rm -r "./databases/$name";
+                rm -r "./databases/data/$name";
             fi
         else
             message="A database with the same name exists, Please try another name."

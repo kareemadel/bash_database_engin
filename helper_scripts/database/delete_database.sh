@@ -1,8 +1,10 @@
 #!/bin/bash
 
 clear;
-source ./helper_scripts/generic/items_menu.sh "./databases" "database";
-rm -rf "./databases/$REPLY";
-rm -rf "./metadata/$REPLY";
-printf "You have delete the $REPLY database successfully."
-read;
+source ./helper_scripts/generic/items_menu.sh "./databases/metadata" "database";
+if [ ! -z "$REPLY" ]; then
+    rm -rf "./databases/data/$REPLY";
+    rm -rf "./databases/metadata/$REPLY";
+    printf "You have delete the $REPLY database successfully."
+    read;
+fi
