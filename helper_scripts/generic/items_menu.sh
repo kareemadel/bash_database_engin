@@ -12,7 +12,7 @@ shopt -s extglob;
 
 path="$(readlink -m $1)";
 
-items=($(ls));
+items=($(ls "$path"));
 
 while true; do
     clear;
@@ -26,7 +26,8 @@ while true; do
     read
     case "$REPLY" in
         +([[:digit:]]))
-            if [ "$REPLY" -le ${$items[@]} ]; then
+            if [ "$REPLY" -le "${#items[@]}" ]; then
+                REPLY="${items[$REPLY]}";
                 break;
             fi
             ;;
