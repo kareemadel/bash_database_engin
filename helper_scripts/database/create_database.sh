@@ -20,6 +20,7 @@ while IFS= read -r name; do
             if mkdir "./metadata/$name" ; then
                 printf "You have created the database $name successfully.\n";
                 DATABASE="$name";
+                read;
                 source ./helper_scripts/database/use_database.sh;
                 break;
             else
