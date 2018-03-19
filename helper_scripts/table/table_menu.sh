@@ -14,7 +14,7 @@ while true; do
     fi
     printf "B) Enter B to go to main .\n";
     printf "q) Enter q to exit.\n";
-    printf "Your choide: ";
+    printf "Your choice: ";
     read
     case "$REPLY" in
         1)

@@ -15,7 +15,7 @@ while true; do
         printf "4) Use \"$TABLE\" table.\n";
     fi
     printf "q) Enter q to exit.\n";
-    printf "Your choide: ";
+    printf "Your choice: ";
     if ! read ; then
         exit 1;
     fi
@@ -33,13 +33,13 @@ while true; do
             break;
             ;;
         4)
-            if [ ! -z "$DATABASE" ]; then
+            if [ -n "$DATABASE" ]; then
                 source ./helper_scripts/database/use_database.sh;
                 break;
             fi
             ;;
         5)
-            if [ ! -z "$TABLE" ]; then
+            if [ -n "$TABLE" ]; then
                 source ./helper_scripts/table/use_table.sh;
                 break;
             fi
@@ -51,3 +51,4 @@ while true; do
             ;;
     esac
 done
+REPLY=;

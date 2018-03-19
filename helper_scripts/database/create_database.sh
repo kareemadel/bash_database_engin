@@ -1,37 +1,13 @@
 #!/bin/bash
 
-clear;
+source ./helper_scripts/generic/choose_name.sh "database";
 
-printf "Please enter the database name, the name must be unique, can can't contain spaces or slash.\n";
-
-while IFS= read -r name; do
-    if [[ "$name" = *" "* ]]; then
-        message="Spaces are not allowed.";
-    fi
-    if [[ "$name" = *"/"* ]]; then
-        if [ -z $message ]; then
-            message="Slashes are not allowed.";
-        else
-            message="${message} Slashes are not allowed.";
-        fi
-    fi
-    if [ -z $message ]; then
-        if mkdir -p "./databases/data/$name" ; then
-            if mkdir -p "./databases/metadata/$name" ; then
-                printf "You have created the database $name successfully.\n";
-                DATABASE="$name";
-                read;
-                source ./helper_scripts/database/use_database.sh;
-                break;
-            else
-                rm -r "./databases/data/$name";
-            fi
-        else
-            message="A database with the same name exists, Please try another name."
-        fi
-    fi
-    clear;
-    printf "%s\n" "$message";
-    printf  "Please try again: "
-    message=
-done
+if [ -n "$REPLY" ]; then
+    DATABASE="$REPLY";
+    mkdir -p "./databases/data/$REPLY";
+    mkdir -p "./databases/metadata/$REPLY";
+    printf "You have created the database $REPLY successfully.\n";
+    read;
+    REPLY=;
+    source ./helper_scripts/database/use_database.sh;
+fi

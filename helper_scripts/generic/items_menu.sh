@@ -9,33 +9,35 @@
 unset items;
 # enable extglob option
 shopt -s extglob;
-
+REPLY=;
 path="$(readlink -m $1)";
 
 items=($(ls "$path"));
 
 while true; do
     clear;
-    i=0;
+    i=1;
     printf "Please select a $2 or enter b to go to previous menu.\n";
     for item in "${items[@]}"; do
         printf "%d) %s\n" "$i" "$item";
         ((i++));
     done
-    printf "Your choide: "
+    printf "Your choice: ";
     if ! read; then
         break;
     fi
     case "$REPLY" in
         +([[:digit:]]))
-            if [ "$REPLY" -le "${#items[@]}" ]; then
-                REPLY="${items[$REPLY]}";
+            if [ "$REPLY" -le "${#items[@]}" -a "$REPLY" -gt 0 ]; then
+                REPLY="${items[$((REPLY-1))]}";
                 break;
             fi
             ;;
         b)
             REPLY=;
             break;
+            ;;
+        *)
             ;;
     esac
 done

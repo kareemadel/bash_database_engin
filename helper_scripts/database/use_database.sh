@@ -14,9 +14,9 @@ while true; do
     fi
     printf "b) Enter b to go back to main menu.\n"
     printf "q) Enter q to exit.\n";
-    printf "Your choide: ";
+    printf "Your choice: ";
     if ! read; then
-        break;
+        return;
     fi
     case "$REPLY" in
         1)
