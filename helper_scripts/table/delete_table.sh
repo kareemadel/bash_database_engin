@@ -8,6 +8,6 @@ if [ -n "$REPLY" ]; then
     if [ "REPLY" = "$TABLE" ]; then
         TABLE=;
     fi
-    printf "You have delete the $REPLY database successfully."
+    echo -n "You have delete the $REPLY database successfully."
     read;
 fi

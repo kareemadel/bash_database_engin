@@ -1,10 +1,9 @@
 #!/bin/bash
 
-export DATABASE=
-export TABLE=
-export COLUMN=
-export CURRENT_MENU=0
-
+export DATABASE=;
+export TABLE=;
+export COLUMN=;
+export CURRENT_MENU=0;
 
 while true; do
     case "$CURRENT_MENU" in
@@ -13,6 +12,9 @@ while true; do
             ;;
         1)
             source ./helper_scripts/database/use_database.sh;
+            ;;
+        2)
+            source ./helper_scripts/table/use_table.sh;
             ;;
     esac
 done

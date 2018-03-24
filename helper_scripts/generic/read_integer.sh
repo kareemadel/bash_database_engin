@@ -1,16 +1,20 @@
 #!/bin/bash
 
+source helper_scripts/generic/helper_functions.sh
+
 is_correct=;
 REPLY=;
 while [ "$is_correct" = "" ]; do
     if ! read number; then
-        is_correct="0";
         REPLY=;
-    elif [[ "$number" =~ ^[1-9][0-9]*$ ]]; then
-        is_correct="1";
+        return;
+    elif is_integer "$number"; then
+        REPLY="$number";
+        return
+    elif [ "$1" = "accept_null" -a -z "$number" ]; then
+        REPLY="null";
+        return;
     else
         printf "Invalid Integer, try again: ";
     fi
 done
-REPLY="$number";
-is_correct="1";

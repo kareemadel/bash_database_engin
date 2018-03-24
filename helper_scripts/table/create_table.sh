@@ -2,8 +2,12 @@
 
 # enable extglob option
 shopt -s extglob;
+
+source ./helper_scripts/generic/helper_functions.sh
+
 source ./helper_scripts/generic/choose_name.sh "table";
-if [ -z "$REPLY" ]; the
+table_name="$REPLY";
+if [ -z "$REPLY" ]; then
     n
     return
 fi
@@ -15,7 +19,6 @@ fi
 number_of_columns="$REPLY";
 i=0;
 colmun_names=();
-echo $is_correct;
 while [ $i -lt $number_of_columns ]; do
     source ./helper_scripts/generic/choose_name.sh "column $((i+1))" "${colmun_names[@]}";
     if [ -z "$REPLY" ]; then
@@ -46,11 +49,11 @@ while [ $i -lt $number_of_columns ]; do
         esac
     done
 done
-i=1;
 while true; do
     printf "Please select the primary key.\n";
+    i=1;
     for column in "${colmun_names[@]}"; do
-        printf "%d) %s\n" "$i" "$column";
+        echo "$i) $column";
         ((i++));
     done
     printf "Your choice: ";
@@ -60,25 +63,17 @@ while true; do
     fi
     case "$REPLY" in
         +([[:digit:]]))
-        PK="$((REPLY-1))";
-        break;
+        if [ $REPLY -gt 0 -a $REPLY -le ${#colmun_names[@]} ]; then
+            PK="$((REPLY-1))";
+            break;
+        fi
         ;;
     *)
         ;;
-esac
+    esac
 done
-touch "./databases/data/$DATABASE/$TABLE";
-touch "./databases/metadata/$DATABASE/$TABLE";
-for ((i=0;i<"$number_of_columns";i++)); do
-metadata="$metadata${data_types[$i]} ${colmun_names[$i]}";
-if [ "$PK" = "$i" ]; then
-    metadata="$metadata PK";
-fi
-metadata="${metadata}\n";
-done
-printf "%b" "${metadata}" > "./databases/metadata/$DATABASE/$TABLE";
-TABLE="$REPLY";
-printf "You have created the table $TABLE successfully.\n";
+create_table "$DATABASE" "$table_name" "$number_of_columns" "$PK" colmun_names[@] data_types[@];
+echo "You have created the table $TABLE successfully.";
 read;
 REPLY=;
 source ./helper_scripts/table/use_table.sh;

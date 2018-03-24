@@ -9,10 +9,11 @@ while true; do
     printf "1) Create a new table.\n";
     printf "2) Use an existing table.\n";
     printf "3) Drop a table.\n";
-    if [ ! -z "$TABLE" ]; then
+    if [ -n "$TABLE" ]; then
         printf "4) Go to $TABLE options.\n";
     fi
-    printf "B) Enter B to go to main .\n";
+    printf "5) delete \"$DATABASE\" database.\n";
+    printf "b) Enter B to go to main .\n";
     printf "q) Enter q to exit.\n";
     printf "Your choice: ";
     read
@@ -30,6 +31,13 @@ while true; do
             if [ ! -z "$TABLE" ]; then
                 source ./helper_scripts/table/use_table.sh;
             fi
+            ;;
+        5)
+            delete_database "$DATABASE";
+            ;;
+        b)
+            CURRENT_MENU=0;
+            return;
             ;;
         q)
             exit 0;

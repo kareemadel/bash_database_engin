@@ -9,10 +9,10 @@ while true; do
     printf "2) Use an existing database.\n";
     printf "3) Delete a database.\n";
     if [ ! -z "$DATABASE" ]; then
-        printf "4) Use \"$DATABASE\" database.\n";
+        echo "4) Use \"$DATABASE\" database.";
     fi
     if [ ! -z "$TABLE" ]; then
-        printf "4) Use \"$TABLE\" table.\n";
+        echo "5) Use \"$TABLE\" table.";
     fi
     printf "q) Enter q to exit.\n";
     printf "Your choice: ";
@@ -22,26 +22,26 @@ while true; do
     case "$REPLY" in
         1)
             source ./helper_scripts/database/create_database.sh;
-            break;
+            return;
             ;;
         2)
             source ./helper_scripts/database/select_database.sh;
-            break;
+            return;
             ;;
         3)
             source ./helper_scripts/database/delete_database.sh;
-            break;
+            return;
             ;;
         4)
             if [ -n "$DATABASE" ]; then
-                source ./helper_scripts/database/use_database.sh;
-                break;
+                CURRENT_MENU=1;
+                return;
             fi
             ;;
         5)
             if [ -n "$TABLE" ]; then
-                source ./helper_scripts/table/use_table.sh;
-                break;
+                CURRENT_MENU=2;
+                return;
             fi
             ;;
         q)

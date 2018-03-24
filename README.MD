@@ -6,5 +6,5 @@ COLUMN   := the name of the currently use column
 CURRENT_MENU := the name of the current menu
                     0:databases menu (Database operation (create, delete, select))
                     1:use database (table operations (create, drop, select))
-                    2:
+                    2:use table (DML operation)
                     3:

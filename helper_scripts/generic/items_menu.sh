@@ -12,7 +12,13 @@ shopt -s extglob;
 REPLY=;
 path="$(readlink -m $1)";
 
-items=($(ls "$path"));
+items=($(ls -A "$path"));
+
+if [ ${#items[@]} -eq 0 ]; then
+    printf "You don't have any $2.\n"
+    read;
+    return;
+fi
 
 while true; do
     clear;
