@@ -17,6 +17,7 @@ items=($(ls -A "$path"));
 if [ ${#items[@]} -eq 0 ]; then
     printf "You don't have any $2.\n"
     read;
+    REPLY=;
     return;
 fi
 

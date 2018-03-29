@@ -4,6 +4,7 @@ source ./helper_scripts/generic/choose_name.sh "database";
 
 if [ -n "$REPLY" ]; then
     DATABASE="$REPLY";
+    TABLE=;
     create_database "$REPLY";
     echo "You have created the database $REPLY successfully.";
     read;

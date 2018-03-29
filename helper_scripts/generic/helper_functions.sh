@@ -20,6 +20,7 @@ delete_database () {
     clear
     if [ "$1" = "$DATABASE" ]; then
         DATABASE=;
+        TABLE=;
     fi
     echo "You have delete the $1 database successfully."
     read;
@@ -73,7 +74,7 @@ get_column_names() {
 get_PK() {
     typeset database="$1";
     typeset table="$2";
-    echo -n "$(($(grep -n PK "databases/metadata/$database/$table" | cut -d: -f1)-1))";
+    echo -n "$(( $(cut -d' ' -f3 "databases/metadata/$database/$table" | grep -n PK | cut -d: -f1)-1 ))";
 }
 
 get_number_of_columns() {

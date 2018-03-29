@@ -9,7 +9,7 @@ PK="$(get_PK $DATABASE $TABLE)";
 data=();
 
 for ((i=0;i<$number_of_columns;i++)); do
-    if get_column_value "$DATABASE" "$TABLE" "$i" "$PK" "${colmun_names[$i]}" "${data_types[$i]}"; then
+    if get_column_value "$DATABASE" "$TABLE" "$i" "$PK" "${column_names[$i]}" "${data_types[$i]}"; then
         data+=( "$REPLY" );
     else
         return;

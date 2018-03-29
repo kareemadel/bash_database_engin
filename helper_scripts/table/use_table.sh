@@ -6,10 +6,11 @@ while true; do
     clear;
     echo "You are now in \"$TABLE\" table.";
     printf "What do you want to do?\n";
-    printf "1) Insert.\n";
-    printf "2) Update.\n";
-    printf "3) Delete.\n";
-    echo "4) Show \"$TABLE\"."
+    printf "1) Insert a row.\n";
+    printf "2) Update a row.\n";
+    printf "3) Delete a row.\n";
+    echo "4) Print a row.";
+    echo "5) Show \"$TABLE\"."
     printf "b) Enter b to go back to main menu.\n"
     printf "q) Enter q to exit.\n";
     printf "Your choice: ";
@@ -28,6 +29,9 @@ while true; do
             source ./helper_scripts/DML/delete_row.sh;
             ;;
         4)
+            source ./helper_scripts/DML/print_row.sh;
+            ;;
+        5)
             source ./helper_scripts/DML/print_table.sh;
             ;;
         b)
