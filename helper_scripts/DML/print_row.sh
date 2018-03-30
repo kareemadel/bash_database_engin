@@ -32,7 +32,7 @@ while [ -z "$valid_value" ]; do
 		row=$?
 		lines=$(cat "./databases/data/$DATABASE/$TABLE" | wc -l)
 		if [ $row -le $lines -a $row -gt 0 ]; then
-			echo $row;
+			source ./helper_scripts/DML/print_headers.sh
 			awk -v line="$row" 'BEGIN{FS=":"; OFS="\t||\t";row=line} NR==row{
 				for (i = 1; i <= NF; i++)
 				{

@@ -142,7 +142,10 @@ get_column_value() {
     typeset valid_value=;
     REPLY=;
     while [ -z "$valid_value" ]; do
-        echo -n "Please inert the value of ${column_name} (${data_type}): ";
+        if [ "$index" = "$PK" ]; then
+            typeset pk_note=" (pk)"
+        fi
+        echo -n "Please inert the value of ${column_name}${pk_note} (${data_type}): ";
         if [ "${data_type}" = "int" ]; then
             source ./helper_scripts/generic/read_integer.sh "accept_null"
             if [ -z "$REPLY" ]; then
